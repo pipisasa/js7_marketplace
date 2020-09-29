@@ -81,6 +81,14 @@ const Routes = ()=>{
             <Logout/>
           </Route>
 
+          <Route>
+            <Layout>
+              <div style={ {minHeight:"50vh"} }>
+                <h1>Error: 404. Page not found</h1>
+              </div>
+            </Layout>
+          </Route>
+
         </Switch>
 
       </Suspense>
