@@ -17,61 +17,108 @@ import {
   ShoppingCart
 } from '@material-ui/icons';
 
+import emptyImage from '../assets/empty-image.png';
 
-const useStyles = makeStyles((theme) => ({
+
+const useStyles = makeStyles(() => ({
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
-    backgroundSize: 'contain'
+    backgroundSize: 'contain',
+    position: 'relative',
   },
-  price:{
-    marginLeft: 'auto',
+  mediaImage: {
+    position: 'absolute',
+    maxHeight: '100%',
+    maxWidth: '100%',
+    top: '50%',
+    left:'50%',
+    transform: 'translate(-50%, -50%)'
+  },
+  oldPrice:{
+    textDecoration: 'line-through',
   },
   card: {
     margin: '10px'
+  },
+  saleIndicator: {
+    position:'absolute',
+    top: '5px',
+    right: '5px',
+  },
+  cardActions: {
+    display: 'flex',
+    justifyContent: 'space-between'
   }
 }));
 
 
-export default function ProductCard() {
+export default function ProductCard( { data } ) {
   const classes = useStyles();
+
   return (
     <Card className={classes.card}>
       <CardHeader
         avatar={
-          <Avatar>U</Avatar>
+        <Avatar>{data.author[0] ?? "?"}</Avatar>
         }
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
           </IconButton>
         }
-        title="Iphone XS"
-        subheader="Elon Mask"
+        title={data.title}
+        subheader={data.author}
       />
       <CardMedia
         className={classes.media}
-        image="https://lh3.googleusercontent.com/proxy/UY4sIkoMlyl_br3mgPa30YSKHvQ247l1DckoYQRvq_Ke6n49-vQlB6Ff_8C1E9Um2nuBZhjqBJDu2OAlSKE0WyGsBqyAIWSMDmy0G--VDP5M52EIjrSvs3hw9N1NBOgNw-f_rw"
-        title="Ihpone XS"
-      />
+      >
+        <img 
+          className={classes.mediaImage}
+          src={data.image || emptyImage}
+          onError={e=>{
+            e.target.src = emptyImage
+          }}
+          alt={data.title}
+        />
+        {data.discountInPercent != null && (
+          <Button 
+            size="medium" 
+            className={classes.saleIndicator} 
+            color="secondary"
+            variant="contained"
+          >
+            -{data.discountInPercent}%
+          </Button>
+        )}
+      </CardMedia>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
-            </Typography>
+          {data.description}
+        </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to card">
-          <ShoppingCart />
-        </IconButton>
-
-        <IconButton aria-label="share">
-          <Share />
-        </IconButton>
-
-        <Button className={classes.price} variant="outlined" color="primary">
-          5000
-        </Button>
+      <CardActions className={classes.cardActions} disableSpacing>
+        <div>
+          <IconButton aria-label="add to card">
+            <ShoppingCart />
+          </IconButton>
+          <IconButton aria-label="share">
+            <Share />
+          </IconButton>
+        </div>
+        <div>
+          {data.salePrice != null && (
+            <Button 
+              className={classes.oldPrice} 
+              color="secondary"
+            >
+              {data.price}
+            </Button>
+          )}
+          <Button className={classes.price} variant="outlined" color="primary">
+            {data.salePrice ?? data.price}
+          </Button>
+        </div>
       </CardActions>
     </Card>
   )
