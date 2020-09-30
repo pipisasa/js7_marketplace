@@ -6,8 +6,20 @@
       "description": "Смартфон iPhone Xs обладает хорошей камерой на 12+12 Мп и батареей емкостью мАч. Оперативной памяти на 4 ГБ хватает для стабильной работы системы, объем встроенной памяти составляет 64 ГБ.",
       "price": 51934,
       "salePrice":48738,
-      "discuntInPercent": 25,
+      "discountInPercent": 25,
       "phone": "+996 700 312 312",
+      "author": "Steve Jobs",
+      "image":"https://svetofor.info/images/detailed/156/smartfon-apple-iphone-xs-max-64-gb-ram-4-gb-dual-sim-space-gray-1.jpg",
+      "countInStock": 20
+    },
+    {
+      "id":1,
+      "title": "Iphone XR",
+      "description": "Смартфон iPhone Xs обладает хорошей камерой на 12+12 Мп и батареей емкостью мАч. Оперативной памяти на 4 ГБ хватает для стабильной работы системы, объем встроенной памяти составляет 64 ГБ.",
+      "price": 51934,
+      "phone": "+996 700 312 312",
+      "author": "Steve Jobs",
+      "image":"https://svetofor.info/images/detailed/156/smartfon-apple-iphone-xs-max-64-gb-ram-4-gb-dual-sim-space-gray-1.jpg",
       "countInStock": 20
     }
   ]
