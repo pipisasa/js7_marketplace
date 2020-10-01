@@ -4,6 +4,10 @@ import { useHistory } from 'react-router-dom'
 
 export default function Header() {
   const history = useHistory();
+  const logout = ()=>{
+    localStorage.removeItem("user");
+    history.replace("/auth/login");
+  }
   return (
     <Container maxWidth="md">
       <Grid container>
@@ -19,6 +23,10 @@ export default function Header() {
             onClick={()=>history.replace("/about-us")}>
             ABOUT US
           </Button>
+        </Grid>
+
+        <Grid item>
+          <Button onClick={logout}>Logout</Button>
         </Grid>
       </Grid>
     </Container>
