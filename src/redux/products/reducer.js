@@ -8,6 +8,7 @@ const INIT_STATE = {
   data: [],
   loading: false,
   error: null,
+  totalCount: 0
 };
 
 const ProductsReducer = (state = INIT_STATE, action)=>{
@@ -17,7 +18,8 @@ const ProductsReducer = (state = INIT_STATE, action)=>{
     case FETCH_DATA_SUCCESS:
       return {
         ...state,
-        data: action.payload,
+        data: action.payload.data,
+        totalCount: action.payload.total,
         loading: false,
         error: null
       };
