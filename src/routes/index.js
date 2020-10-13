@@ -38,6 +38,7 @@ const PrivateRoute = (props)=>{
 const Home = lazy(()=>import('./Home'));
 const AboutUs = lazy(()=>import('./AboutUs'));
 const Admin = lazy(()=>import('./Admin'));
+const Cart = lazy(()=>import('./Cart'));
 
 //? Auth pages
 const Login = lazy(()=>import('./auth/Login'));
@@ -66,6 +67,12 @@ const Routes = ()=>{
           <PrivateRoute exact path="/admin">
             <Layout>
               <Admin/>
+            </Layout>
+          </PrivateRoute>
+
+          <PrivateRoute exact path="/cart">
+            <Layout>
+              <Cart/>
             </Layout>
           </PrivateRoute>
 

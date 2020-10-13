@@ -1,14 +1,18 @@
 import {
   FETCH_DATA,
   FETCH_DATA_SUCCESS,
-  FETCH_DATA_FAILED
+  FETCH_DATA_FAILED,
+  ADD_ITEM_TO_CART,
+  REMOVE_ITEM_FROM_CART,
+  CLEAR_CART
 } from './constants';
 
 const INIT_STATE = {
   data: [],
   loading: false,
   error: null,
-  totalCount: 0
+  totalCount: 0,
+  cart: JSON.parse(localStorage.getItem("cart")) || [],
 };
 
 const ProductsReducer = (state = INIT_STATE, action)=>{
@@ -30,6 +34,14 @@ const ProductsReducer = (state = INIT_STATE, action)=>{
         loading: false,
         error: action.payload
       };
+    case ADD_ITEM_TO_CART:
+    case REMOVE_ITEM_FROM_CART:
+    case CLEAR_CART:
+      localStorage.setItem(
+        "cart", 
+        JSON.stringify(action.payload)
+      );
+      return {...state, cart: action.payload}
     default: return state;
   }
 }
