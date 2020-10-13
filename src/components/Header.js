@@ -198,7 +198,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
 
-      <MenuItem>
+      <MenuItem onClick={()=>history.replace("/cart")}>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={cartItemsCount} color="secondary">
             <ShoppingCartIcon />
@@ -270,7 +270,7 @@ export default function PrimarySearchAppBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
 
-            <IconButton color="inherit">
+            <IconButton onClick={()=>history.replace("/cart")} color="inherit">
               <Badge badgeContent={cartItemsCount} color="secondary">
                 <ShoppingCartIcon />
               </Badge>

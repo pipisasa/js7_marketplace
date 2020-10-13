@@ -72,7 +72,7 @@ export default function ProductCard( { data } ) {
 
   const isInCart = useMemo(()=>{
     return cart.some(cartItem=>cartItem.id===data.id);
-  }, [cart]);
+  }, [cart, data.id]);
 
   return (
     <Card className={classes.card}>
