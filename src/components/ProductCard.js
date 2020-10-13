@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
   Avatar,
   Button,
@@ -18,7 +18,9 @@ import {
 } from '@material-ui/icons';
 
 import emptyImage from '../assets/empty-image.png';
-
+import { addItemToCart, removeItemFromCart } from '../redux/products/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import RemoveShoppingCartIcon from '@material-ui/icons/RemoveShoppingCart';
 
 const useStyles = makeStyles(() => ({
   media: {
@@ -55,6 +57,22 @@ const useStyles = makeStyles(() => ({
 
 export default function ProductCard( { data } ) {
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+
+  const handleAddToCart = ()=>{
+    dispatch(addItemToCart(data))
+  }
+
+  const handleRemoveFromCart = ()=>{
+    dispatch(removeItemFromCart(data))
+  }
+
+  const cart = useSelector(state=>state.products.cart);
+
+  const isInCart = useMemo(()=>{
+    return cart.some(cartItem=>cartItem.id===data.id);
+  }, [cart]);
 
   return (
     <Card className={classes.card}>
@@ -99,9 +117,15 @@ export default function ProductCard( { data } ) {
       </CardContent>
       <CardActions className={classes.cardActions} disableSpacing>
         <div>
-          <IconButton aria-label="add to card">
-            <ShoppingCart />
-          </IconButton>
+          {isInCart ? (
+            <IconButton style={{color: "red"}} onClick={handleRemoveFromCart} aria-label="add to card">
+              <RemoveShoppingCartIcon />
+            </IconButton>
+          ) : (
+            <IconButton onClick={handleAddToCart} aria-label="add to card">
+              <ShoppingCart />
+            </IconButton>
+          )}
           <IconButton aria-label="share">
             <Share />
           </IconButton>
